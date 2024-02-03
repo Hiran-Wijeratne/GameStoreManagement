@@ -1,9 +1,11 @@
-﻿@*@page "/staffs/"
+﻿@page "/staffs/"
+@*@inject HttpInterceptorService _interceptor
+@implements IDisposable*@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
 
-<h3 class="card-title">FeastFood Staff</h3>
+<h3 class="card-title">GameStore Staff</h3>
 
 <a href="/staffs/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
@@ -36,7 +38,7 @@ else
                 <tr>
                     <td>@staff.Name</td>
                     <td>@staff.NRIC</td>
-                    <td>@staff.DOB</td>
+                    <td>@(staff.DOB.HasValue ? staff.DOB.Value.ToShortDateString() : "")</td>
                     <td>@staff.Email</td>
                     <td>@staff.ContactNumber</td>
                     <td>@staff.Address</td>
@@ -62,15 +64,20 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-
+        @*_interceptor.MonitorEvent();*@
         Staffs = await _client.GetFromJsonAsync<List<Staff>>(Endpoints.StaffsEndpoint);
     }
 
-    protected async override Task OnAfterRenderAsync(bool firstRender)
+    @*protected async override Task OnAfterRenderAsync(bool firstRender)
     {
         await js.InvokeVoidAsync("AddDataTable", "#staffsTable");
     }
 
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#staffsTable");
+        _interceptor.DisposeEvent();
+    }*@
 
     async Task Delete(int staffId)
     {
@@ -85,4 +92,4 @@ else
             }
         }
     }
-}*@
+}

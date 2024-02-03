@@ -4,6 +4,7 @@ using GameStoreManagement.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameStoreManagement.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240203072736_AddApplicationTables")]
+    partial class AddApplicationTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,32 +272,6 @@ namespace GameStoreManagement.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Games");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Createdby = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(714),
-                            DateUpdated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(723),
-                            Name = "Call of Duty",
-                            Platform = "Play Station",
-                            Price = 49.899999999999999,
-                            ReleaseDate = new DateTime(2009, 2, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Updatedby = "System"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Createdby = "System",
-                            DateCreated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(726),
-                            DateUpdated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(726),
-                            Name = "Need for Speed",
-                            Platform = "X-box",
-                            Price = 39.899999999999999,
-                            ReleaseDate = new DateTime(2001, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Updatedby = "System"
-                        });
                 });
 
             modelBuilder.Entity("GameStoreManagement.Shared.Domain.Review", b =>
@@ -371,36 +348,6 @@ namespace GameStoreManagement.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Staffs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "New York",
-                            ContactNumber = "96750134",
-                            Createdby = "System",
-                            DOB = new DateTime(2002, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateCreated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(977),
-                            DateUpdated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(978),
-                            Email = "emily@gmail.com",
-                            NRIC = "K2456345T",
-                            Name = "Edward Williams",
-                            Updatedby = "System"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Boston",
-                            ContactNumber = "80850134",
-                            Createdby = "System",
-                            DOB = new DateTime(1981, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateCreated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(980),
-                            DateUpdated = new DateTime(2024, 2, 3, 16, 6, 34, 517, DateTimeKind.Local).AddTicks(980),
-                            Email = "jamie.dornan@gmail.com",
-                            NRIC = "T7458445J",
-                            Name = "Dave Jonas",
-                            Updatedby = "System"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
